@@ -4,10 +4,21 @@
   become: yes
 
 - name: install certbot
-  apt: pkg={{item}} state=latest
-  with_items:
-    - certbot
-  become: yes
+  become: yes # needed to install apt packages
+  apt:
+    allow_unauthenticated: no
+    autoclean: yes
+    autoremove: yes
+    cache_valid_time: 7200
+    force: no
+    force_apt_get: no
+    install_recommends: yes
+    name: ["certbot"]
+    only_upgrade: no
+    purge: no
+    state: present
+    update_cache: yes
+  tags: apt
 
 - name: change the path to letsencrypt
   set_fact:

@@ -16,15 +16,13 @@
 
 - name: Install python depends
   pip:
+    editable: no
+    name: ["setuptools", "pip"]
+    state: present
     virtualenv: "{{ letsencrypt_venv }}"
-    virtualenv_site_packages: no
-    name: "{{ item }}"
-    state: latest
     virtualenv_python: python2
+    virtualenv_site_packages: no
   become: yes
-  with_items:
-    - setuptools
-    - pip
   tags: install
 
 - name: Install pycparser
@@ -39,6 +37,6 @@
     virtualenv: "{{ letsencrypt_venv }}"
     virtualenv_site_packages: no
     name: letsencrypt
-    state: latest
+    state: present
   become: yes
   tags: install
