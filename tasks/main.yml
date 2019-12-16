@@ -68,11 +68,11 @@
     dest: "/etc/letsencrypt/renewal/{{ letsencrypt_cert_domains[0] }}.conf"
   become: yes
   with_dict:
-    os_packages_only: False
+    os_packages_only: "False"
     verb: certonly
-    noninteractive_mode: False
-    uir: False
-    hsts: False
+    noninteractive_mode: "False"
+    uir: "False"
+    hsts: "False"
     authenticator: '{{ letsencrypt_authenticator }}'
 
 - name: Fix the webroot map in the renewal file
